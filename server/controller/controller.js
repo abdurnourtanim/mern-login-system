@@ -1,8 +1,9 @@
 const bcrypt = require("bcrypt");
 const User = require("../model/schema");
+const jwt = require("jsonwebtoken");
 
 // signup controller
-exports.signup = async (req, res) => {
+const signup = async (req, res) => {
   try {
     if (!req.body) {
       res.status(406).json({ err: "You have to fill sign up form." });
@@ -51,7 +52,7 @@ exports.signup = async (req, res) => {
 };
 
 // login controller
-exports.login = async (req, res) => {
+const login = async (req, res) => {
   try {
     if (!req.body) {
       res.status(406).json({ err: "You have to fill the email and password." });
@@ -75,8 +76,25 @@ exports.login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(406).json({ err: "Invalid password!" });
 
-    res.json({ username: user.username, email: user.email });
+    // JWT
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY);
+
+    res.json({ token, username: user.username, email: user.email });
   } catch (error) {
     res.status(500).json({ err: error.message || "Login failed!" });
   }
 };
+
+// delete user controller
+const deleteUser = async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.user_id);
+    res.json({ msg: "User deleted  successfully" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ err: error.message || "Error while deleteing user." });
+  }
+};
+
+module.exports = { signup, login, deleteUser };
