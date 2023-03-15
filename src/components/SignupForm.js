@@ -15,10 +15,14 @@ const SignupForm = ({ signupState }) => {
     checkPassword,
     setCheeckPassword,
     handleSubmit,
+    error,
   } = signupState;
 
   return (
-    <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+    >
       <Input name="Name" value={username} setValue={setUsername} />
       <Input name="Email" value={email} setValue={setEmail} />
       <Input
@@ -34,8 +38,14 @@ const SignupForm = ({ signupState }) => {
         setValue={setCheeckPassword}
       />
 
+      {error && (
+        <div className="mb-2 bg-purple-100 p-2 rounded">
+          <span className="text-red-600">{error}</span>
+        </div>
+      )}
+
       <div className="flex items-center justify-between">
-        <Button onClick={handleSubmit}>Sign up</Button>
+        <Button type="submit">Sign up</Button>
         <ForgetPassword />
       </div>
       <SwitchPage to="/login" text="You have already a accout">

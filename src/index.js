@@ -12,5 +12,3 @@ root.render(
     <App />
   </Provider>
 );
-
-console.log(store.getState());

@@ -30,4 +30,10 @@ const login = (userInfo) => {
     .catch((error) => Promise.reject(error.response.data));
 };
 
-export { signup, login };
+// logout user
+const logout = () => {
+  localStorage.removeItem("x-access-token");
+  return { msg: "Logout successfull." };
+};
+
+export { signup, login, logout };

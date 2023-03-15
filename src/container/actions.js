@@ -1,4 +1,4 @@
-import { login, signup } from "../components/services/auth.service";
+import { login, logout, signup } from "../components/services/auth.service";
 import * as actionType from "./types";
 
 // signup action
@@ -43,4 +43,16 @@ const loginAction = (userInfo) => (dispatch) => {
     });
 };
 
-export { signupAction, loginAction };
+// logout action
+const logoutAction = () => (dispatch) => {
+  const msg = logout();
+
+  dispatch({
+    type: actionType.LOGOUT,
+    payload: { msg },
+  });
+
+  return Promise.resolve(msg);
+};
+
+export { signupAction, loginAction, logoutAction };

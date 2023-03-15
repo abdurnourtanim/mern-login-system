@@ -7,6 +7,7 @@ import { loginAction } from "../container/actions";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const dispatch = useDispatch();
   const store = useStore();
@@ -26,8 +27,8 @@ const Login = () => {
         navigate("/");
       })
       .catch((error) => {
-        alert("Login failed!");
-        console.log(error);
+        setError(error.err);
+        console.log(error.err);
       });
 
     console.log(store.getState());
@@ -39,6 +40,7 @@ const Login = () => {
     setEmail,
     setPassword,
     handleSubmit,
+    error,
   };
 
   return (

@@ -9,6 +9,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [checkPassword, setCheeckPassword] = useState("");
+  const [error, setError] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,16 +21,19 @@ const SignUp = () => {
       email,
       password,
       checkPassword,
+      error,
     };
 
     const validate = dispatch(signupAction(newUser));
 
     validate
       .then((data) => {
-        alert("Sign up successfull.");
         navigate("/login");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setError(error.data.err);
+        console.log(error.data.err);
+      });
   };
 
   const signupState = {
@@ -42,6 +46,7 @@ const SignUp = () => {
     checkPassword,
     setCheeckPassword,
     handleSubmit,
+    error,
   };
 
   return (
