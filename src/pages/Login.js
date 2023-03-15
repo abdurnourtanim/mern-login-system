@@ -25,7 +25,10 @@ const Login = () => {
       .then((data) => {
         navigate("/");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        alert("Login failed!");
+        console.log(error);
+      });
 
     console.log(store.getState());
   };
