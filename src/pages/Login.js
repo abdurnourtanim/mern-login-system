@@ -1,19 +1,33 @@
 import React, { useState } from "react";
+import { useDispatch, useStore } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
+import { loginAction } from "../container/actions";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatch = useDispatch();
+  const store = useStore();
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newUser = {
+    const userInfo = {
       email,
       password,
     };
 
-    console.log(newUser);
+    const login = dispatch(loginAction(userInfo));
+    login
+      .then((data) => {
+        navigate("/");
+      })
+      .catch((error) => console.log(error));
+
+    console.log(store.getState());
   };
 
   const loginState = {
