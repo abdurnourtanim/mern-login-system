@@ -79,7 +79,7 @@ const Header = () => {
               ) : (
                 <>
                   <Link
-                    to="/signin"
+                    to="/login"
                     className="font-medium text-gray-800 hover:text-white hover:bg-[#17aec8]   flex items-center transition duration-150 ease-in-out py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   >
                     Sign in
