@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useStore } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
@@ -12,6 +12,17 @@ const Login = () => {
   const dispatch = useDispatch();
   const store = useStore();
   const navigate = useNavigate();
+
+  const route = () => {
+    const token = localStorage.getItem("x-access-token");
+    return token ? true : false;
+  };
+
+  useEffect(() => {
+    if (route()) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

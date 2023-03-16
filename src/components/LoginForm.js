@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Button from "./Button";
 import ForgetPassword from "./ForgetPassword";
 import Input from "./Input";
@@ -35,7 +34,6 @@ const LoginForm = ({ loginState }) => {
       <SwitchPage to="/signup" text="You have no accout please">
         Sign up
       </SwitchPage>
-      <Link to="/">Home</Link>
     </form>
   );
 };

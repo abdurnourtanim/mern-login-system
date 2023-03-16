@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import SignupForm from "../components/SignupForm";
@@ -13,6 +13,17 @@ const SignUp = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const route = () => {
+    const token = localStorage.getItem("x-access-token");
+    return token ? true : false;
+  };
+
+  useEffect(() => {
+    if (route()) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

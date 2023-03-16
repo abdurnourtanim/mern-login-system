@@ -4,7 +4,7 @@ const Button = ({ children, ...rest }) => {
   return (
     <button
       {...rest}
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      className="bg-[#17aec8] hover:bg-[#13a6c0da] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
     >
       {children}
     </button>
